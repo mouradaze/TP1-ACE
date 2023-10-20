@@ -60,21 +60,19 @@
                 <h:selectOneMenu id="discount" 
                                  value="#{customerDetailBean.customer.discount}" 
                                  title="Discount" 
-                                 required="true" requiredMessage="The Discount field is required.">
+                                 required="true" requiredMessage="The Discount field is required."
+                                 converter="discountConverter">
                     <!-- TODO: update below reference to list of available items-->
                     <f:selectItems value="#{customerDetailBean.discounts}"
                                    var="discount"
-                                   itemLabel="#{discount.code}"/>
+                                   itemLabel="#{discount.code} (#{discount.rate} %)"
+                                   itemValue="#{discount}"/>
                 </h:selectOneMenu>
-                <h:outputLabel value="Zip:" for="zip" />
-                <h:selectOneMenu id="zip" 
-                                 value="#{customerDetailBean.customer.zip}" 
-                                 title="Zip" 
-                                 required="true" requiredMessage="The Zip field is required.">
-                    <!-- TODO: update below reference to list of available items-->
-                    <f:selectItems value="#{fixme}"/>
-                </h:selectOneMenu>
+                
+                <h:button id="back" value="Revenir à la liste" outcome="customerList"/>
+                <h:commandButton id="update" value="Enregistrer" action="#{customerDetailBean.update}"/>
             </h:panelGrid>
+            <h:messages/>
         </h:form>
     </h:body>
 </html>
