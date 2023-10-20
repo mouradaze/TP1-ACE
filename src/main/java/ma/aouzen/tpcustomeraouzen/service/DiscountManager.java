@@ -10,34 +10,28 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import java.util.List;
-import ma.aouzen.tpcustomeraouzen.entity.Customer;
+import ma.aouzen.tpcustomeraouzen.entity.Discount;
 
 /**
  *
  * @author PC
  */
 @RequestScoped
-public class CustomerManager {
-
-    @PersistenceContext(unitName = "customerPU")
+public class DiscountManager {
+    @PersistenceContext
     private EntityManager em;
 
-    @Transactional
-    public void persist(Customer customer) {
-        em.persist(customer);
-    }
-
-    public List<Customer> getAllCustomers() {
-        Query query = em.createNamedQuery("Customer.findAll");
+    public List<Discount> getAllDiscounts() {
+        Query query = em.createNamedQuery("Discount.findAll");
         return query.getResultList();
     }
 
-    @Transactional
-    public Customer update(Customer customer) {
-        return em.merge(customer);
+    public Discount findById(String code) {
+        return em.find(Discount.class, code);
     }
 
-    public Customer findById(int idCustomer) {
-        return em.find(Customer.class, idCustomer);
+    @Transactional
+    public void persist(Discount discount) {
+        em.persist(discount);
     }
 }
