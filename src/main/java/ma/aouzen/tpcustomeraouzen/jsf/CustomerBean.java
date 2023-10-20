@@ -19,9 +19,10 @@ import ma.aouzen.tpcustomeraouzen.service.CustomerManager;
 @Named(value = "customerBean")
 @ViewScoped
 public class CustomerBean implements Serializable {
+    private List<Customer> customerList;
     @Inject  
     private CustomerManager customerManager;
-    private List<Customer> customerList;  
+      
 
     /**
      * Creates a new instance of CustomerBean
